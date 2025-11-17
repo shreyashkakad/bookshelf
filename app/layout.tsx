@@ -17,6 +17,9 @@ const geist = localFont({
 
 export const metadata: Metadata = {
   title: "bookshelf",
+  icons: {
+    icon: "/bars-staggered-solid.svg"
+  }
 };
 
 export default function RootLayout({
