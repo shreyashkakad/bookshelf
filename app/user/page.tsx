@@ -1,10 +1,8 @@
-import Link from "next/link"
+import type { Metadata } from "next";
+import ProfilePanel from "@/components/ProfilePanel";
 
-export default function Page() {
-    return(
-        <>
-            <h1>This is User Page</h1>
-            <Link href="/">Go to HomePage</Link>
-        </>
-    )
+export const metadata: Metadata = { title: "Your profile" };
+
+export default function UserPage() {
+  return <ProfilePanel />;
 }

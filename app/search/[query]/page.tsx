@@ -1,28 +1,14 @@
-import Navbar from "@/components/Navbar";
-import BookGrid from "@/components/BookGrid";
+import { redirect } from "next/navigation";
+import { searchHref } from "@/lib/search-href";
 
-export default async function SearchPage({ 
-  params,
-  searchParams 
-}: { 
-  params: Promise<{ query: string }>,
-  searchParams: Promise<{ offset?: string }>
-}) {
+// Old links looked like /search/dune; results now live at /search?q=dune.
+export default async function LegacySearchRoute({ params }: { params: Promise<{ query: string }> }) {
   const { query } = await params;
-  const { offset = '0' } = await searchParams;
-  
-  if (!query) return <div>Invalid query</div>;
-
-  const offsetNum = parseInt(offset);
-  const res = await fetch(
-    `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=100&offset=${offsetNum}`
-  );
-  const data = await res.json();
-
-  return (
-    <>
-      <Navbar />
-      <BookGrid books={data.docs} query={query} total={data.numFound} offset={offsetNum} />
-    </>
-  );
+  let decoded = query;
+  try {
+    decoded = decodeURIComponent(query);
+  } catch {
+    // Malformed escape sequence: use the raw segment.
+  }
+  redirect(searchHref(decoded));
 }

@@ -1,9 +1,23 @@
+import Container from "./Container";
+
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-30 bg-black/40 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto py-3 text-center">
-        <span className="text-sm text-white/70">© 2025 BookShelf</span>
-      </div>
+    <footer className="mt-20 border-t border-line">
+      <Container className="flex flex-col gap-2 py-8 text-sm text-ink-soft sm:flex-row sm:items-center sm:justify-between">
+        <p>
+          Book data and covers from{" "}
+          <a
+            href="https://openlibrary.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-azure underline underline-offset-2 hover:text-azure-deep"
+          >
+            Open Library
+          </a>
+          .
+        </p>
+        <p>Your favorites and wishlist live in this browser only.</p>
+      </Container>
     </footer>
   );
 }
